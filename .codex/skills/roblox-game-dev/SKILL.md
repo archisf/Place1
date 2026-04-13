@@ -8,6 +8,7 @@ Use this skill when working in this repository on Roblox gameplay, tooling, or a
 - Protect the existing `Place1.rbxl` snapshot
 - Organize code by shared, server, and client runtime boundaries
 - Prefer small Luau modules over monolithic scripts
+- Support Roblox Studio Assistant MCP and beta playtest workflows without letting them drift from source control
 
 ## Project Map
 
@@ -17,6 +18,7 @@ Use this skill when working in this repository on Roblox gameplay, tooling, or a
 - `src/StarterPlayer/StarterPlayerScripts`: client logic
 - `wally.toml`: dependency manifest
 - `.vscode/tasks.json`: common dev commands
+- `docs/STUDIO_ASSISTANT_MCP.md`: Studio Assistant MCP and playtest guidance
 
 ## Working Rules
 
@@ -25,3 +27,4 @@ Use this skill when working in this repository on Roblox gameplay, tooling, or a
 3. If a feature needs packages, update `wally.toml` deliberately and explain why.
 4. Keep starter code minimal and readable.
 5. When local CLIs are present, verify with formatting and linting before finishing.
+6. When a task involves Roblox Assistant playtesting, use explicit scenario prompts and capture findings in a reproducible format.
