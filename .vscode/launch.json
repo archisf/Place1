@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Rojo: Serve (Connect in Studio)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "powershell -NoExit -Command \"$env:Path += ';' + [Environment]::GetEnvironmentVariable('Path','User'); rojo serve default.project.json\""
+    },
+    {
+      "name": "Rojo: Build Place Snapshot",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "powershell -NoExit -Command \"if (!(Test-Path 'build')) { New-Item -ItemType Directory 'build' | Out-Null }; $env:Path += ';' + [Environment]::GetEnvironmentVariable('Path','User'); rojo build default.project.json --output build/Place1.rbxlx\""
+    }
+  ]
+}
