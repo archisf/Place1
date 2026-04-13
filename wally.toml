@@ -1,0 +1,12 @@
+[package]
+name = "arkad/place1"
+version = "0.1.0"
+realm = "shared"
+registry = "https://github.com/UpliftGames/wally-index"
+exclude = [
+    "Place1.rbxl",
+    "build",
+    "out",
+]
+
+[dependencies]

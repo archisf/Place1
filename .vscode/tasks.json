@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Rojo: Serve",
+      "type": "shell",
+      "command": "rojo",
+      "args": [
+        "serve",
+        "default.project.json"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Rojo: Build",
+      "type": "shell",
+      "command": "rojo",
+      "args": [
+        "build",
+        "default.project.json",
+        "--output",
+        "build/Place1.rbxlx"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Wally: Install",
+      "type": "shell",
+      "command": "wally",
+      "args": [
+        "install"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "StyLua: Format",
+      "type": "shell",
+      "command": "stylua",
+      "args": [
+        "src"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Selene: Lint",
+      "type": "shell",
+      "command": "selene",
+      "args": [
+        "src"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+*.rbxl.lock
+*.rbxlx.lock
+*.tmp
+*.log
+
+build/
+out/
+dist/
+
+Packages/
+wally.lock
+
+.DS_Store
+Thumbs.db
+
+.vscode/*.code-workspace
