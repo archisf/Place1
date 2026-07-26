@@ -2,12 +2,20 @@ param(
     [switch]$Build
 )
 
-$requiredTool = "rojo"
+$requiredTools = @("rojo", "wally")
 
-if (-not (Get-Command $requiredTool -ErrorAction SilentlyContinue)) {
-    Write-Host "Rojo is not installed or not on PATH." -ForegroundColor Red
-    Write-Host "Install Rojo first, then rerun this script." -ForegroundColor Yellow
-    exit 1
+foreach ($requiredTool in $requiredTools) {
+    if (-not (Get-Command $requiredTool -ErrorAction SilentlyContinue)) {
+        Write-Host "${requiredTool} is not installed or not on PATH." -ForegroundColor Red
+        Write-Host "Install Rokit, run 'rokit install', then rerun this script." -ForegroundColor Yellow
+        exit 1
+    }
+}
+
+wally install
+
+if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
 }
 
 if ($Build) {

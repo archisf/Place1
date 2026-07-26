@@ -8,7 +8,8 @@ out/
 dist/
 
 Packages/
-wally.lock
+DevPackages/
+sourcemap.json
 
 .DS_Store
 Thumbs.db

@@ -2,6 +2,27 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Rokit: Install Tools",
+      "type": "shell",
+      "command": "rokit",
+      "args": [
+        "install"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Project: Check",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/check.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "Rojo: Serve",
       "type": "shell",
       "command": "rojo",

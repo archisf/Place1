@@ -1,0 +1,27 @@
+{
+  "name": "Place1Tests",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "Shared": {
+        "$path": "src/ReplicatedStorage/Shared"
+      },
+      "Packages": {
+        "$path": "DevPackages"
+      }
+    },
+    "ServerScriptService": {
+      "Server": {
+        "$path": "src/ServerScriptService/Server"
+      },
+      "TestRunner": {
+        "$path": "tests/TestRunner.server.luau"
+      }
+    },
+    "ServerStorage": {
+      "Tests": {
+        "$path": "tests/specs"
+      }
+    }
+  }
+}

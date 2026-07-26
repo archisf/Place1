@@ -1,0 +1,37 @@
+name: Quality
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install pinned Roblox tools
+        uses: CompeyDev/setup-rokit@v0.1.2
+        with:
+          version: v1.2.0
+          cache: true
+
+      - name: Install Wally dependencies from lock file
+        run: wally install
+
+      - name: Check formatting
+        run: stylua --check src tests
+
+      - name: Lint
+        run: selene src tests
+
+      - name: Build game place
+        run: rojo build default.project.json --output Place1.rbxlx
+
+      - name: Build Studio test place
+        run: rojo build tests.project.json --output Place1Tests.rbxlx

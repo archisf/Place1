@@ -56,30 +56,36 @@ The project now has a simple playable progression loop implemented fully in sour
 - touching it gives `10` coins
 - it respawns after `8` seconds
 
-## Recommended Tooling
+## Pinned Tooling
 
-Install these tools on Windows before active development:
+The project pins its CLI tools in `rokit.toml`:
 
-1. Roblox Studio
-2. Rojo
-3. Wally
-4. StyLua
-5. Selene
-6. Git
-7. VS Code
+- Rojo 7.6.1
+- Wally 0.3.2
+- StyLua 2.5.2
+- Selene 0.31.0
 
-If you already use an installer like `aftman`, `scoop`, or manual binaries, that is fine. The project is set up to work with standard CLI commands like `rojo`, `wally`, `stylua`, and `selene`.
+Install [Rokit](https://github.com/rojo-rbx/rokit), then run:
+
+```powershell
+rokit install
+powershell -ExecutionPolicy Bypass -File scripts/check.ps1
+```
+
+The check script installs the locked Wally packages, checks formatting, runs Selene, and builds both
+the game and Studio test places.
 
 ## Suggested Workflow
 
 1. Open this folder in VS Code.
 2. Install the recommended extensions.
-3. Install Rojo, Wally, StyLua, and Selene.
-4. Run `wally install` when you start adding dependencies.
+3. Install Rokit and run `rokit install`.
+4. Run `wally install` after dependency changes; Wally 0.3.2 uses the committed lock file automatically.
 5. Run `rojo serve`.
 6. Open Roblox Studio and connect the Rojo plugin to the running server.
 7. If you are using Roblox Studio Assistant, enable the built-in MCP workflow and use the playtest agent with scenario-driven prompts.
-8. Keep gameplay code inside `src/` and treat `Place1.rbxl` as the legacy snapshot until you fully migrate.
+8. Run `scripts/check.ps1` before committing.
+9. Keep gameplay code inside `src/` and treat `Place1.rbxl` as the legacy snapshot until you fully migrate.
 
 ## How To Test
 
@@ -93,11 +99,24 @@ If you already use an installer like `aftman`, `scoop`, or manual binaries, that
 
 You can also open `build/Place1.rbxlx` directly in Studio after a `rojo build` if you want to test a built snapshot instead of live sync.
 
+## Automated Tests
+
+TestEZ 0.4.1 is installed as a development-only Wally dependency. It is present in
+`tests.project.json` but excluded from the regular game:
+
+1. Run `scripts/check.ps1`.
+2. Open `build/Place1Tests.rbxlx` in Studio.
+3. Press Play.
+4. Confirm Studio Output reports zero TestEZ failures.
+
+Focused acceptance scenarios are documented in `tests/PLAYTEST.md`.
+
 ## Main Source Files
 
-- `src/ReplicatedStorage/Shared/init.luau`: shared gameplay configuration and formatting helpers
-- `src/ServerScriptService/main.server.luau`: leaderstats, passive rewards, pickups, and boost purchase logic
-- `src/StarterPlayer/StarterPlayerScripts/main.client.luau`: HUD, boost button, and client-side status updates
+- `src/ReplicatedStorage/Shared`: compatibility facade, configuration, formatting, UI models, and pure economy rules
+- `src/ServerScriptService/Server`: leaderstats, passive rewards, pickup, boost, and remote modules
+- `src/StarterPlayer/StarterPlayerScripts/Client`: the mountable session HUD controller
+- the server and client `main` scripts are thin composition entrypoints
 
 ## Project Layout
 
@@ -116,6 +135,7 @@ scripts/
 ## Notes
 
 - `Place1.rbxl` is preserved and not modified by this setup.
-- The starter scripts are intentionally minimal so we can grow the architecture cleanly.
-- Wally is configured but no gameplay dependencies are forced yet.
+- Player data is session-only; persistent DataStore profiles are intentionally out of scope.
+- TestEZ is the only Wally dependency and is isolated to development builds.
+- TestEZ is archived upstream; its small test-facing surface is intentionally isolated for a future replacement.
 - Studio Assistant guidance is documented separately so AI playtests and source-based changes stay aligned.

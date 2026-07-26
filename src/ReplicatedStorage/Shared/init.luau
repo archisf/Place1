@@ -1,36 +1,23 @@
-local Shared = {}
+--!strict
+
+local Config = require(script.Config)
+local EconomyRules = require(script.EconomyRules)
+local Formatters = require(script.Formatters)
+local HudViewModel = require(script.HudViewModel)
+
+local Shared = {
+    -- Preserve the original facade so scripts stored in the legacy place keep working.
+    SessionStats = Config,
+    EconomyRules = EconomyRules,
+    HudViewModel = HudViewModel,
+}
 
 function Shared.getGreeting(): string
     return "Place1 shared module loaded"
 end
 
-Shared.SessionStats = {
-    HudTitle = "Session Stats",
-    MilestoneSeconds = 30,
-    CoinRewardSeconds = 15,
-    CoinRewardAmount = 5,
-    PickupCoinReward = 10,
-    PickupRespawnSeconds = 8,
-    SpeedBoostCost = 20,
-    SpeedBoostDuration = 12,
-    DefaultWalkSpeed = 16,
-    BoostWalkSpeed = 26,
-}
+Shared.formatClock = Formatters.formatClock
+Shared.formatCoins = Formatters.formatCoins
+Shared.formatDuration = Formatters.formatDuration
 
-function Shared.formatClock(totalSeconds: number): string
-    local safeSeconds = math.max(0, math.floor(totalSeconds))
-    local minutes = math.floor(safeSeconds / 60)
-    local seconds = safeSeconds % 60
-
-    return string.format("%02d:%02d", minutes, seconds)
-end
-
-function Shared.formatCoins(totalCoins: number): string
-    return string.format("%d", math.max(0, math.floor(totalCoins)))
-end
-
-function Shared.formatDuration(totalSeconds: number): string
-    return string.format("%.1fs", math.max(0, totalSeconds))
-end
-
-return Shared
+return table.freeze(Shared)
