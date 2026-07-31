@@ -4,7 +4,19 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Shared = require(ReplicatedStorage.Shared)
-local SessionHud = require(script.Parent.Client.SessionHud)
+local clientModules = script.Parent:WaitForChild("Client")
+
+if not clientModules:IsA("Folder") then
+    error("PlayerScripts.Client must be a Folder")
+end
+
+local sessionHudModule = clientModules:WaitForChild("SessionHud")
+
+if not sessionHudModule:IsA("ModuleScript") then
+    error("PlayerScripts.Client.SessionHud must be a ModuleScript")
+end
+
+local SessionHud = require(sessionHudModule)
 
 print("[Client]", Shared.getGreeting())
 

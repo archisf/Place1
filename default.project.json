@@ -9,7 +9,10 @@
       "$path": "src/ServerScriptService"
     },
     "StarterPlayer": {
-      "$path": "src/StarterPlayer"
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "$path": "src/StarterPlayer/StarterPlayerScripts"
+      }
     }
   }
 }
