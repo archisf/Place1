@@ -1,6 +1,7 @@
 --!strict
 
 local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Shared = require(ReplicatedStorage.Shared)
@@ -70,8 +71,15 @@ function SessionHud.mount(player: Player, purchaseSpeedBoost: RemoteFunction): C
 
     local panel = Instance.new("Frame")
     panel.Name = "Panel"
-    panel.AnchorPoint = Vector2.new(1, 0)
-    panel.Position = UDim2.new(1, -16, 0, 16)
+
+    if UserInputService.TouchEnabled then
+        panel.AnchorPoint = Vector2.new(0.5, 0)
+        panel.Position = UDim2.new(0.5, 0, 0, 48)
+    else
+        panel.AnchorPoint = Vector2.new(1, 0.5)
+        panel.Position = UDim2.new(1, -16, 0.5, 0)
+    end
+
     panel.Size = UDim2.fromOffset(260, 170)
     panel.BackgroundColor3 = Color3.fromRGB(17, 24, 39)
     panel.BackgroundTransparency = 0.08
